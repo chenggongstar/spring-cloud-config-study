@@ -1,0 +1,26 @@
+单机配置
+server.port=${port}
+spring.application.name=serverRegisterCenter
+eureka.instance.hostname=${hostname}
+#是否将自己注册到enreka server  默认为true
+eureka.client.registerWithEureka=false
+#从其他节点获取注册信息     默认为true
+eureka.client.fetchRegistry=false
+eureka.client.serviceUrl.defaultZone=http://${eureka.instance.hostname}:${server.port}/eureka/
+
+启动命令
+java -jar server-register-0.0.1-SNAPSHOT.jar --port=81 --hostname=cloud011.com
+--port=81 --hostname=cloud011.com  会对应applicaiton.properties中的server.port和eureka.instance.hostname的值
+------------------------------------------------------------------------------------------------------------------
+
+集群配置
+server.port=${port}
+spring.application.name=serverRegisterCenter
+eureka.instance.hostname=${hostname}
+eureka.client.serviceUrl.defaultZone=http://${registerHostname}:${registerPort}/eureka/
+
+启动命令
+java -jar server-register-0.0.1-SNAPSHOT.jar --port=81 --hostname=cloud011.com --registerHostname=cloud012.com --registerPort=81
+java -jar server-register-0.0.1-SNAPSHOT.jar --port=81 --hostname=cloud012.com --registerHostname=cloud011.com --registerPort=81
+--port=81 --hostname=cloud011.com  会对应applicaiton.properties中的server.port和eureka.instance.hostname的值
+
